@@ -1,0 +1,36 @@
+﻿<UserControl x:Class="SchoolManagementApp.View.AddClassControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:local="clr-namespace:SchoolManagementApp.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Margin="10,0,0,0">
+        <Label Content="Enter class name" HorizontalAlignment="Left" Margin="33,1,0,0" VerticalAlignment="Top" Width="115"/>
+        <TextBox HorizontalAlignment="Left" Margin="148,0,0,0" TextWrapping="Wrap" Text="{Binding Name}" VerticalAlignment="Top" Width="405" Height="25"/>
+        <Label Content="Select specialization" HorizontalAlignment="Left" Margin="33,31,0,0" VerticalAlignment="Top" Width="115"/>
+        <Label Content="Select class teacher" HorizontalAlignment="Left" Margin="33,134,0,0" VerticalAlignment="Top" Width="115"/>
+        <DataGrid x:Name="dgSpecializations" SelectedItem="{Binding SelectedSpecialization}" AutoGenerateColumns="False" ItemsSource="{Binding SpecializationList}" Margin="148,31,232,321">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <DataGrid x:Name="dgTeachers" SelectedItem="{Binding SelectedTeacher}" AutoGenerateColumns="False" ItemsSource="{Binding TeacherList}" Margin="148,134,232,250">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="First name" Binding="{Binding FirstName}" />
+                <DataGridTextColumn Header="Last name" Binding="{Binding LastName}" />
+            </DataGrid.Columns>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged">
+                    <i:InvokeCommandAction Command="{Binding TeacherSelectionChangedCommand}" CommandParameter="{Binding SelectedItem, ElementName=dgTeachers}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </DataGrid>
+        <Button Command="{Binding AddClassCommand}"  Content="Add Class" HorizontalAlignment="Left" Margin="148,259,0,0" VerticalAlignment="Top" Height="35" Width="145"/>
+        <TextBlock Text="{Binding ErrorMessage, UpdateSourceTrigger=PropertyChanged}" Foreground="Red" x:Name="txtMessage" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="310,254,0,0" Height="35" Width="340" />
+
+
+    </Grid>
+</UserControl>

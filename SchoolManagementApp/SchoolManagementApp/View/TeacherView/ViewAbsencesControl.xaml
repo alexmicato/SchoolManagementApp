@@ -1,0 +1,69 @@
+﻿<UserControl x:Class="SchoolManagementApp.View.TeacherView.ViewAbsencesControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:local="clr-namespace:SchoolManagementApp.View.TeacherView"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UniformGrid Columns="4" >
+        <StackPanel >
+            <Label Content="Classes" HorizontalAlignment="Center" Margin="0,0,0,5" />
+            <DataGrid x:Name="dgClasses" SelectedItem="{Binding SelectedClass}" AutoGenerateColumns="False" ItemsSource="{Binding ClassList}" Height="119">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Class name" Binding="{Binding ClassName}" />
+                </DataGrid.Columns>
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding ClassSelectionChangedCommand}" CommandParameter="{Binding SelectedItem, ElementName=dgClasses}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </DataGrid>
+        </StackPanel>
+        <StackPanel>
+            <Label Content="Subjects" HorizontalAlignment="Center" Margin="0,0,0,5" />
+            <DataGrid x:Name="dgSubjects" SelectedItem="{Binding SelectedSubject}" AutoGenerateColumns="False" ItemsSource="{Binding SubjectList}" Height="119" Width="198">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Subjects name" Binding="{Binding Name}" />
+                </DataGrid.Columns>
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding SubjectSelectionChangedCommand}" CommandParameter="{Binding SelectedItem, ElementName=dgSubjects}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </DataGrid>
+        </StackPanel>
+        <StackPanel>
+            <Label Content="Students" HorizontalAlignment="Center" Margin="0,0,0,5" />
+            <DataGrid x:Name="dgStudents" SelectedItem="{Binding SelectedStudent}" AutoGenerateColumns="False" ItemsSource="{Binding StudentList}" Height="119">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="First name" Binding="{Binding FirstName}" />
+                    <DataGridTextColumn Header="Last name" Binding="{Binding LastName}" />
+                </DataGrid.Columns>
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding StudentSelectionChangedCommand}" CommandParameter="{Binding SelectedItem, ElementName=dgStudents}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </DataGrid>
+        </StackPanel>
+        <StackPanel >
+            <Label Content="Absences" HorizontalAlignment="Center" Margin="0,0,0,5" />
+            <DataGrid x:Name="dgAbsences" SelectedItem="{Binding SelectedAbsence }" AutoGenerateColumns="False" ItemsSource="{Binding AbsenceList}" Height="119">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Date" Binding="{Binding Date}" />
+                    <DataGridTextColumn Header="Is motivated" Binding="{Binding IsMotivated}" />
+                </DataGrid.Columns>
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding AbsenceSelectionChangedCommand}" CommandParameter="{Binding SelectedItem, ElementName=dgAbsences}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </DataGrid>
+        </StackPanel>
+
+        <Button Command="{Binding MotivateAbsenceCommand}" Content="Motivate absence" Margin="11,-20,48,210"/>
+        <TextBlock Text="{Binding ErrorMessage, UpdateSourceTrigger=PropertyChanged}" Foreground="Red" x:Name="txtMessage" Margin="10,-20,10,210"/>
+    </UniformGrid>
+</UserControl>

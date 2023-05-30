@@ -1,0 +1,86 @@
+﻿<UserControl x:Class="SchoolManagementApp.View.TeacherView.ViewGradesControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SchoolManagementApp.View.TeacherView"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UniformGrid Columns="4" >
+        <StackPanel >
+            <Label Content="Classes" HorizontalAlignment="Center" Margin="0,0,0,5" />
+            <DataGrid x:Name="dgClasses" SelectedItem="{Binding SelectedClass}" AutoGenerateColumns="False" ItemsSource="{Binding ClassList}" Height="119">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Class name" Binding="{Binding ClassName}" />
+                </DataGrid.Columns>
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding ClassSelectionChangedCommand}" CommandParameter="{Binding SelectedItem, ElementName=dgClasses}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </DataGrid>
+        </StackPanel>
+        <StackPanel>
+            <Label Content="Subjects" HorizontalAlignment="Center" Margin="0,0,0,5" />
+            <DataGrid x:Name="dgSubjects" SelectedItem="{Binding SelectedSubject}" AutoGenerateColumns="False" ItemsSource="{Binding SubjectList}" Height="119" Width="198">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Subjects name" Binding="{Binding Name}" />
+                </DataGrid.Columns>
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding SubjectSelectionChangedCommand}" CommandParameter="{Binding SelectedItem, ElementName=dgSubjects}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </DataGrid>
+        </StackPanel>
+        <StackPanel>
+            <Label Content="Students" HorizontalAlignment="Center" Margin="0,0,0,5" />
+            <DataGrid x:Name="dgStudents" SelectedItem="{Binding SelectedStudent}" AutoGenerateColumns="False" ItemsSource="{Binding StudentList}" Height="119">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="First name" Binding="{Binding FirstName}" />
+                    <DataGridTextColumn Header="Last name" Binding="{Binding LastName}" />
+                </DataGrid.Columns>
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding StudentSelectionChangedCommand}" CommandParameter="{Binding SelectedItem, ElementName=dgStudents}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </DataGrid>
+        </StackPanel>
+        <StackPanel >
+            <Label Content="Grades" HorizontalAlignment="Center" Margin="0,0,0,5" />
+            <DataGrid x:Name="dgGrades" SelectedItem="{Binding SelectedGrade}" AutoGenerateColumns="False" ItemsSource="{Binding GradeList}" Height="119">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Grade" Binding="{Binding GradeValue}" />
+                    <DataGridTextColumn Header="Date" Binding="{Binding Date}" />
+                    <DataGridTextColumn Header="Is final" Binding="{Binding IsFinal}" />
+                    <DataGridTextColumn Header="Is averaged" Binding="{Binding IsAveraged}" />
+                </DataGrid.Columns>
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding GradeSelectionChangedCommand}" CommandParameter="{Binding SelectedItem, ElementName=dgGrades}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </DataGrid>
+        </StackPanel>
+        <StackPanel Margin="0,50,0,65">
+            <RadioButton Content="Semester 1" IsChecked="{Binding IsSemester1}" />
+            <RadioButton Content="Semester 2" IsChecked="{Binding IsSemester2}" />
+        </StackPanel>
+        <CheckBox IsChecked="{Binding HasFinal}" Content="Subject has final" Command="{Binding YourCommand}" FontSize="15" Margin="10,50,50,75"/>
+
+        <Button Command="{Binding DeleteGradeCommand}" Content="Annul grade" Margin="11,50,25,75"/>
+        <Button Command="{Binding CalculateAverageCommand}" Content="Calculate average" Margin="11,50,25,75"/>
+        <TextBlock Text="{Binding ErrorMessage, UpdateSourceTrigger=PropertyChanged}" Foreground="Red" x:Name="txtMessage" Margin="400,-20,-571,141" RenderTransformOrigin="0.5,0.5">
+            <TextBlock.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="0.024"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </TextBlock.RenderTransform>
+        </TextBlock>
+    </UniformGrid>
+</UserControl>

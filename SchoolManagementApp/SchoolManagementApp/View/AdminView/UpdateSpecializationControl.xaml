@@ -1,0 +1,30 @@
+﻿<UserControl x:Class="SchoolManagementApp.View.AdminView.UpdateSpecializationControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:local="clr-namespace:SchoolManagementApp.View.AdminView"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <DataGrid x:Name="dgSpecializations" SelectedItem="{Binding SelectedSpecialization}" AutoGenerateColumns="False" ItemsSource="{Binding SpecializationList}" Margin="75,22,285,275">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged">
+                    <i:InvokeCommandAction Command="{Binding SelectionChangedCommand}" CommandParameter="{Binding SelectedItem, ElementName=dgSpecializations}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Label Content="Select specialization" HorizontalAlignment="Left" Margin="78,0,0,0" VerticalAlignment="Top" Width="365"/>
+        <Label Content="Name:" HorizontalAlignment="Left" Margin="78,180,0,0" VerticalAlignment="Top" Width="120"/>
+        <TextBox HorizontalAlignment="Left" Margin="198,180,0,0" TextWrapping="Wrap" Text="{Binding Name}" VerticalAlignment="Top" Width="317" Height="26"/>
+        <Label Content="Year:" HorizontalAlignment="Left" Margin="78,220,0,0" VerticalAlignment="Top" Width="115"/>
+        <TextBox HorizontalAlignment="Left" Margin="198,225,0,0" TextWrapping="Wrap" Text="{Binding Year}" VerticalAlignment="Top" Width="317" Height="26"/>
+        <Button Command="{Binding UpdateSpecializationCommand}"  Content="Save" HorizontalAlignment="Left" Margin="78,260,0,0" VerticalAlignment="Top" Height="25" Width="340"/>
+        <TextBlock Text="{Binding ErrorMessage, UpdateSourceTrigger=PropertyChanged}" Foreground="Red" x:Name="txtMessage" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="423,260,0,0" Height="25" Width="355" />
+    </Grid>
+</UserControl>

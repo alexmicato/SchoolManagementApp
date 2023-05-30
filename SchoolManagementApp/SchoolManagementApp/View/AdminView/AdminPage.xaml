@@ -1,0 +1,55 @@
+﻿<Page x:Class="SchoolManagementApp.View.AdminPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:SchoolManagementApp.View"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="AdminPage">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Menu Grid.Row="0">
+            <MenuItem Header="Add">
+                <MenuItem Header="User" Command="{Binding MenuItemSelectedCommand}" CommandParameter="AddUser"/>
+                <MenuItem Header="Class" Command="{Binding MenuItemSelectedCommand}" CommandParameter="AddClass"/>
+                <MenuItem Header="Specialization" Command="{Binding MenuItemSelectedCommand}" CommandParameter="AddSpecialization"/>
+                <MenuItem Header="Subject" Command="{Binding MenuItemSelectedCommand}" CommandParameter="AddSubject"/>
+                <MenuItem Header="Subject to specialization" Command="{Binding MenuItemSelectedCommand}" CommandParameter="AddSubjectToSpecialization"/>
+                <MenuItem Header="Teacher subjects" Command="{Binding MenuItemSelectedCommand}" CommandParameter="AddCourse"/>
+            </MenuItem>
+            <MenuItem Header="View">
+                <MenuItem Header="Users" Command="{Binding MenuItemSelectedCommand}" CommandParameter="ViewUsers"/>
+                <MenuItem Header="Classes" Command="{Binding MenuItemSelectedCommand}" CommandParameter="ViewClasses"/>
+                <MenuItem Header="Specializations" Command="{Binding MenuItemSelectedCommand}" CommandParameter="ViewSpecializations"/>
+                <MenuItem Header="Subjects" Command="{Binding MenuItemSelectedCommand}" CommandParameter="ViewSubjects"/>
+                <MenuItem Header="Teacher subjects" Command="{Binding MenuItemSelectedCommand}" CommandParameter="ViewTeacherSubjects"/>
+            </MenuItem>
+            <MenuItem Header="Update">
+                <MenuItem Header="User" Command="{Binding MenuItemSelectedCommand}" CommandParameter="UpdateUser"/>
+                <MenuItem Header="Student" Command="{Binding MenuItemSelectedCommand}" CommandParameter="UpdateStudent"/>
+                <MenuItem Header="Teacher" Command="{Binding MenuItemSelectedCommand}" CommandParameter="UpdateTeacher"/>
+                <MenuItem Header="Subject" Command="{Binding MenuItemSelectedCommand}" CommandParameter="UpdateSubject"/>
+                <MenuItem Header="Class" Command="{Binding MenuItemSelectedCommand}" CommandParameter="UpdateClass"/>
+                <MenuItem Header="Specialization" Command="{Binding MenuItemSelectedCommand}" CommandParameter="UpdateSpecialization"/>
+            </MenuItem>
+            <MenuItem Header="TBD">
+                <MenuItem Header="Users" Command="{Binding MenuItemSelectedCommand}" CommandParameter="GetUsers"/>
+                <MenuItem Header="Students" Command="{Binding MenuItemSelectedCommand}" CommandParameter="GetStudents"/>
+                <MenuItem Header="Teachers" Command="{Binding MenuItemSelectedCommand}" CommandParameter="GetTeachers"/>
+                <MenuItem Header="Subjects" Command="{Binding MenuItemSelectedCommand}" CommandParameter="GetSubjects"/>
+                <MenuItem Header="Classes" Command="{Binding MenuItemSelectedCommand}" CommandParameter="GetClasses"/>
+                <MenuItem Header="Specializations" Command="{Binding MenuItemSelectedCommand}" CommandParameter="GetSpecializations"/>
+            </MenuItem>
+        </Menu>
+        <Grid Grid.Row="1" Height="500">
+            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                <ContentControl Content="{Binding SelectedMenuItemContent}" Margin="75,70,120,70"/>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</Page>
